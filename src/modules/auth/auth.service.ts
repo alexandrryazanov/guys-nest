@@ -11,6 +11,7 @@ export class AuthService {
 
   async login(email: string, password: string) {
     const user = await this.usersService.getByEmail(email);
+    // TODO: compare password hashes
     if (user?.hashedPassword !== password) throw new UnauthorizedException();
     return await this.generateTokensPair({ sub: user.id });
   }
