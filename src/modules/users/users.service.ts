@@ -21,7 +21,13 @@ export class UsersService {
 
   async getById(id: string) {
     const env = this.configService.get<string>('ENV');
-    const result = await this.prismaService.user.findUnique({ where: { id } });
+    const result = await this.prismaService.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        email: true,
+      },
+    });
 
     return { env, ...result };
   }

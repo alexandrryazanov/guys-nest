@@ -61,13 +61,9 @@ export class TransactionsService {
         name: dto.name,
         description: dto.description,
         amount: dto.amount,
-        bank: dto.bankId ? { connect: { id: dto.bankId } } : undefined,
-        category: dto.categoryId
-          ? { connect: { id: dto.categoryId } }
-          : undefined,
-        supplier: dto.supplierId
-          ? { connect: { id: dto.supplierId } }
-          : undefined,
+        bank: dto.bankId ? { connect: { id: dto.bankId } } : null,
+        category: dto.categoryId ? { connect: { id: dto.categoryId } } : null,
+        supplier: dto.supplierId ? { connect: { id: dto.supplierId } } : null,
         user: { connect: { id: userId } },
         tags: dto.tags
           ? {
@@ -76,7 +72,7 @@ export class TransactionsService {
                 create: { name: tag },
               })),
             }
-          : undefined,
+          : null,
       },
     });
   }

@@ -2,8 +2,13 @@ import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { GetAllUsersDto, getAllUsersResponse } from './dto/get-all-users.dto';
 import { AuthGuard } from '../../guards/auth.guard';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UserId } from '../../decorators/user-id.decorator';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
+import { UserId } from '@/decorators/user-id.decorator';
 
 @ApiTags('Users endpoints')
 @Controller('users')
@@ -12,6 +17,7 @@ export class UsersController {
 
   @Get('/me')
   @UseGuards(AuthGuard)
+  @ApiBearerAuth('accessToken')
   @ApiOperation({ summary: 'Get logged user' })
   async getMe(@UserId() userId: string) {
     return this.usersService.getById(userId);

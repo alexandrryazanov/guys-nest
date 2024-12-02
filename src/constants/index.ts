@@ -2,7 +2,7 @@ export const ENVIRONMENT = 'ENV';
 export const MY_USER_ID = 'MY_USER_ID';
 
 export const EXPIRES_IN = {
-  ACCESS: '1m',
+  ACCESS: '5m',
   REFRESH: '1d',
 };
 

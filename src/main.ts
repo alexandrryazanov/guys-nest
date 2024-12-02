@@ -20,6 +20,14 @@ async function bootstrap() {
     .setTitle('Guys Nest JS')
     .setDescription('API для кучки программистов')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'apiKey',
+        in: 'header',
+        name: 'Authorization',
+      },
+      'accessToken',
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
