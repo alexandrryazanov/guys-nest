@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { corsMiddleware } from '@/middlewares/corsMiddleware';
 var cookieParser = require('cookie-parser');
 
 async function bootstrap() {
@@ -15,6 +16,7 @@ async function bootstrap() {
   );
 
   app.use(cookieParser());
+  app.use(corsMiddleware);
 
   const config = new DocumentBuilder()
     .setTitle('Guys Nest JS')
