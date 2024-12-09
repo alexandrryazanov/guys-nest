@@ -21,7 +21,8 @@ export class AuthGuard implements CanActivate {
 
     if (
       this.configService.get(ENVIRONMENT) === 'local' &&
-      this.configService.get(MY_USER_ID)
+      this.configService.get(MY_USER_ID) &&
+      !request.headers['origin']
     ) {
       request['userId'] = this.configService.get(MY_USER_ID);
       return true;
